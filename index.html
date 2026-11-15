@@ -1,1 +1,924 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vanny | Personal Portfolio</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #020b24;
+    color: white;
+}
+
+/* ================= LOGIN ================= */
+
+#loginPage {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(circle at top, #0759b8, #020b24 60%);
+}
+
+.login-card {
+    width: 90%;
+    max-width: 380px;
+    padding: 40px 30px;
+
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.2);
+
+    border-radius: 25px;
+    text-align: center;
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 0 40px rgba(0,170,255,.35);
+}
+
+.logo {
+    font-size: 55px;
+    margin-bottom: 10px;
+}
+
+.login-card h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.login-card p {
+    color: #b8c9e8;
+    margin-bottom: 25px;
+}
+
+.input {
+    width: 100%;
+    padding: 14px;
+    margin: 8px 0;
+
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 12px;
+
+    background: rgba(0,0,0,.3);
+    color: white;
+
+    outline: none;
+}
+
+.input::placeholder {
+    color: #aaa;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+
+    border: 0;
+    border-radius: 12px;
+
+    background: linear-gradient(90deg,#008cff,#00c6ff);
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px #00aaff;
+}
+
+#error {
+    color: #ff7373;
+    margin-top: 15px;
+}
+
+/* ================= WEBSITE ================= */
+
+#website {
+    display: none;
+    min-height: 100vh;
+    background:
+        linear-gradient(135deg,#020b24,#003b73,#020b24);
+}
+
+/* NAVBAR */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 70px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 7%;
+
+    background: rgba(2,11,36,.75);
+    backdrop-filter: blur(15px);
+
+    border-bottom: 1px solid rgba(255,255,255,.1);
+
+    z-index: 1000;
+}
+
+.brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.brand span {
+    color: #00c6ff;
+}
+
+nav ul {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #00c6ff;
+}
+
+.logout {
+    width: auto;
+    padding: 8px 15px;
+    margin: 0;
+
+    background: transparent;
+    border: 1px solid #00aaff;
+
+    border-radius: 20px;
+
+    color: white;
+    cursor: pointer;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 100px 20px 50px;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 5;
+}
+
+.profile {
+    width: 130px;
+    height: 130px;
+
+    margin: auto;
+    margin-bottom: 25px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 55px;
+
+    background:
+        linear-gradient(135deg,#0077ff,#00d4ff);
+
+    border: 5px solid rgba(255,255,255,.7);
+
+    box-shadow: 0 0 40px #008cff;
+}
+
+.hero h1 {
+    font-size: clamp(40px,8vw,75px);
+    margin-bottom: 10px;
+}
+
+.hero h1 span {
+    color: #00c6ff;
+}
+
+.hero h2 {
+    color: #b7c9e8;
+    font-weight: normal;
+    font-size: clamp(18px,4vw,25px);
+}
+
+.hero p {
+    max-width: 600px;
+    margin: 20px auto;
+
+    color: #b8c9e8;
+    line-height: 1.7;
+}
+
+.btn {
+    display: inline-block;
+
+    padding: 13px 25px;
+
+    margin: 8px;
+
+    border-radius: 30px;
+
+    background: linear-gradient(90deg,#007cff,#00c6ff);
+
+    color: white;
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: .3s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px #00aaff;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid #00aaff;
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+    padding: 100px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title h2 {
+    font-size: 38px;
+}
+
+.section-title span {
+    color: #00c6ff;
+}
+
+.section-title p {
+    color: #9fb5d8;
+    margin-top: 10px;
+}
+
+/* ABOUT */
+
+.about {
+    max-width: 850px;
+    margin: auto;
+
+    padding: 35px;
+
+    background: rgba(255,255,255,.06);
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    border-radius: 20px;
+
+    line-height: 1.8;
+
+    color: #c8d6ec;
+
+    text-align: center;
+}
+
+/* SKILLS */
+
+.skills {
+    display: grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+
+    gap: 20px;
+
+    max-width: 1000px;
+    margin: auto;
+}
+
+.skill {
+    padding: 30px 20px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,.06);
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    border-radius: 18px;
+
+    transition: .3s;
+}
+
+.skill:hover {
+    transform: translateY(-8px);
+
+    border-color: #00aaff;
+
+    box-shadow: 0 0 25px rgba(0,170,255,.2);
+}
+
+.skill-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+/* PROJECTS */
+
+.projects {
+    display: grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap: 25px;
+
+    max-width: 1000px;
+
+    margin: auto;
+}
+
+.project {
+    background: rgba(255,255,255,.06);
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    transition: .3s;
+}
+
+.project:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 0 30px rgba(0,150,255,.2);
+}
+
+.project h3 {
+    margin-bottom: 12px;
+    color: #00c6ff;
+}
+
+.project p {
+    color: #b7c9e8;
+    line-height: 1.6;
+}
+
+/* CONTACT */
+
+.contact {
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+}
+
+.contact p {
+    color: #b8c9e8;
+    margin: 12px 0;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+
+    color: #8198bb;
+
+    border-top: 1px solid rgba(255,255,255,.1);
+}
+
+/* ================= BALLOONS ================= */
+
+.balloon {
+    position: absolute;
+
+    width: 45px;
+    height: 58px;
+
+    border-radius: 50%;
+
+    opacity: .7;
+
+    animation: float 5s ease-in-out infinite;
+}
+
+.balloon:after {
+    content: "";
+    position: absolute;
+
+    width: 1px;
+    height: 80px;
+
+    background: white;
+
+    left: 50%;
+    top: 57px;
+}
+
+.balloon1 {
+    background: #ff4d6d;
+    left: 5%;
+    top: 25%;
+}
+
+.balloon2 {
+    background: #ffd166;
+    right: 7%;
+    top: 35%;
+    animation-delay: 1s;
+}
+
+.balloon3 {
+    background: #06d6a0;
+    left: 12%;
+    bottom: 15%;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-25px);
+    }
+}
+
+/* ================= FIREWORKS ================= */
+
+.firework {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    animation: fireworks 2.5s infinite;
+
+    opacity: 0;
+}
+
+.fw1 {
+    left: 20%;
+    top: 20%;
+}
+
+.fw2 {
+    right: 25%;
+    top: 18%;
+    animation-delay: .8s;
+}
+
+.fw3 {
+    left: 50%;
+    top: 15%;
+    animation-delay: 1.6s;
+}
+
+@keyframes fireworks {
+
+    0% {
+        opacity: 1;
+        box-shadow: 0 0 0 white;
+    }
+
+    45% {
+        opacity: 1;
+
+        box-shadow:
+        0 -70px 0 #00c6ff,
+        50px -50px 0 #fff,
+        70px 0 0 #00c6ff,
+        50px 50px 0 #fff,
+        0 70px 0 #00c6ff,
+        -50px 50px 0 #fff,
+        -70px 0 0 #00c6ff,
+        -50px -50px 0 #fff;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(.4);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+    nav {
+        padding: 0 20px;
+    }
+
+    nav ul {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 43px;
+    }
+
+    section {
+        padding: 80px 20px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<!-- ================= LOGIN ================= -->
+
+<div id="loginPage">
+
+<div class="login-card">
+
+<div class="logo">💙</div>
+
+<h1>Welcome</h1>
+
+<p>Login to enter my personal website</p>
+
+<input
+class="input"
+id="username"
+type="text"
+placeholder="Username">
+
+<input
+class="input"
+id="password"
+type="password"
+placeholder="Password">
+
+<button class="login-btn" onclick="login()">
+LOGIN
+</button>
+
+<div id="error"></div>
+
+</div>
+
+</div>
+
+
+<!-- ================= WEBSITE ================= -->
+
+<div id="website">
+
+<!-- NAVIGATION -->
+
+<nav>
+
+<div class="brand">
+V<span>anny</span>
+</div>
+
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+<button class="logout" onclick="logout()">
+Logout
+</button>
+
+</nav>
+
+
+<!-- HOME -->
+
+<section class="hero" id="home">
+
+<!-- balloons -->
+<div class="balloon balloon1"></div>
+<div class="balloon balloon2"></div>
+<div class="balloon balloon3"></div>
+
+<!-- fireworks -->
+<div class="firework fw1"></div>
+<div class="firework fw2"></div>
+<div class="firework fw3"></div>
+
+<div class="hero-content">
+
+<div class="profile">
+👩‍💻
+</div>
+
+<h1>
+Hello, I'm <span>Vanny</span>
+</h1>
+
+<h2>
+Aspiring Frontend Developer
+</h2>
+
+<p>
+Welcome to my personal portfolio.
+I'm learning web development and building
+my skills one project at a time.
+</p>
+
+<a href="#projects" class="btn">
+View My Projects
+</a>
+
+<a href="#contact" class="btn btn-outline">
+Contact Me
+</a>
+
+</div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+<div class="section-title">
+
+<h2>About <span>Me</span></h2>
+
+<p>Get to know me</p>
+
+</div>
+
+<div class="about">
+
+<p>
+Hello! I'm Vanny. I am currently learning
+HTML, CSS and JavaScript because I want to
+become a professional frontend developer.
+
+I enjoy creating websites, experimenting with
+designs and learning new things about technology.
+
+This website is my personal space where I can
+showcase my progress and projects.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- SKILLS -->
+
+<section id="skills">
+
+<div class="section-title">
+
+<h2>My <span>Skills</span></h2>
+
+<p>Things I'm currently learning</p>
+
+</div>
+
+<div class="skills">
+
+<div class="skill">
+<div class="skill-icon">🌐</div>
+<h3>HTML</h3>
+<p>Building website structure</p>
+</div>
+
+<div class="skill">
+<div class="skill-icon">🎨</div>
+<h3>CSS</h3>
+<p>Design and responsive layouts</p>
+</div>
+
+<div class="skill">
+<div class="skill-icon">⚡</div>
+<h3>JavaScript</h3>
+<p>Interactive website features</p>
+</div>
+
+<div class="skill">
+<div class="skill-icon">💻</div>
+<h3>Web Design</h3>
+<p>Creating modern interfaces</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+<div class="section-title">
+
+<h2>My <span>Projects</span></h2>
+
+<p>Some of the things I have created</p>
+
+</div>
+
+<div class="projects">
+
+<div class="project">
+
+<h3>🎉 Birthday Website</h3>
+
+<p>
+An interactive birthday website
+with balloons, fireworks and animations.
+</p>
+
+<a href="#" class="btn">
+View Project
+</a>
+
+</div>
+
+
+<div class="project">
+
+<h3>🔐 Login Website</h3>
+
+<p>
+A simple login interface created
+using HTML, CSS and JavaScript.
+</p>
+
+<a href="#" class="btn">
+View Project
+</a>
+
+</div>
+
+
+<div class="project">
+
+<h3>🎮 Mini Game</h3>
+
+<p>
+A small browser game project
+created while practicing JavaScript.
+</p>
+
+<a href="#" class="btn">
+View Project
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<div class="section-title">
+
+<h2>Contact <span>Me</span></h2>
+
+<p>Let's connect</p>
+
+</div>
+
+<div class="contact">
+
+<p>📧 Email: suheolni@email.com</p>
+
+<p>📱 Phone:09858713365</p>
+
+<p>📍 Quezon City, Philippines</p>
+
+<a href="mailto:your@email.com" class="btn">
+Send Me a Message
+</a>
+
+</div>
+
+</section>
+
+
+<footer>
+
+© 2026 Vanny. All Rights Reserved.
+
+</footer>
+
+</div>
+
+
+<script>
+
+/* LOGIN */
+
+function login() {
+
+let username =
+document.getElementById("username").value;
+
+let password =
+document.getElementById("password").value;
+
+
+/* CHANGE YOUR LOGIN HERE */
+
+if (
+username === "vanny" &&
+password === "200569"
+) {
+
+document.getElementById("loginPage")
+.style.display = "none";
+
+document.getElementById("website")
+.style.display = "block";
+
+window.scrollTo(0,0);
+
+}
+
+else {
+
+document.getElementById("error")
+.innerHTML =
+"❌ Incorrect username or password";
+
+}
+
+}
+
+
+/* LOGOUT */
+
+function logout() {
+
+document.getElementById("website")
+.style.display = "none";
+
+document.getElementById("loginPage")
+.style.display = "flex";
+
+document.getElementById("username").value = "";
+document.getElementById("password").value = "";
+
+}
+
+</script>
+
+</body>
+  </html>
